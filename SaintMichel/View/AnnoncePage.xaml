@@ -1,0 +1,150 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="SaintMichel.View.AnnoncePage"
+             xmlns:viewmodel="clr-namespace:SaintMichel.ViewModel"
+             xmlns:model="clr-namespace:SaintMichel.Model"
+             Title="AnnoncePage"
+             >
+    <!-- Le BindingContext sera automatiquement défini grâce à DI -->
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*" />
+            <RowDefinition Height="3*" />
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="0.1*"/>
+            <ColumnDefinition Width="0.5*"/>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="0.5*"/>
+            <ColumnDefinition Width="0.1*"/>
+        </Grid.ColumnDefinitions>
+        <Border Grid.Row="0" Grid.Column="2" VerticalOptions="Center">
+            <Border.StrokeShape>
+                <RoundRectangle CornerRadius="10"/>
+            </Border.StrokeShape>
+            <Picker VerticalOptions="Center" ItemsSource="{Binding CategoriePicker}" SelectedItem="{Binding SelectedCategory}" />
+        </Border>
+        <Border Grid.Row="0" Grid.Column="4" VerticalOptions="Center">
+            <Border.StrokeShape>
+                <RoundRectangle CornerRadius="10"/>
+            </Border.StrokeShape>
+            <Picker VerticalOptions="Center" ItemsSource="{Binding renumerationPicker}" SelectedItem="{Binding SelectedRemuneration}" />
+    
+        </Border>
+
+        <Border BackgroundColor="Orange" Padding="0" Grid.Column="1" Grid.Row="2" Grid.ColumnSpan="5">
+            <Border.StrokeShape>
+                <RoundRectangle CornerRadius="20"/>
+            </Border.StrokeShape>
+            <Grid Background="Orange">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="0.5*" />
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="0.5*" />
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="0.1*" />
+                    <RowDefinition Height="*" />
+                    <RowDefinition Height="0.1*" />
+                </Grid.RowDefinitions>
+                <Grid Grid.Column="1" Grid.Row="1" Grid.ColumnSpan="3">
+
+                    <RefreshView   
+
+                     IsRefreshing="{Binding IsBusy, Mode=TwoWay}">
+
+                        <CollectionView ItemsSource="{Binding ObsItems}" Grid.Column="2"
+                SelectionMode="Single" SelectedItem="{Binding SelectedItem}"
+SelectionChangedCommand="{Binding EventSelectedCommand}">
+
+                            <CollectionView.ItemTemplate>
+                                <DataTemplate>
+                                    
+                                    <Border Margin="0,0,0,10" Padding="1" Stroke="LightGray"  StrokeShape="RoundRectangle 10">
+                                        <Grid  BackgroundColor="White">
+                                            <Grid.ColumnDefinitions>
+                                                <ColumnDefinition Width="0.01*"/>
+                                                <ColumnDefinition Width="0.7*" />
+                                                <ColumnDefinition Width="*" />
+                                                <ColumnDefinition Width="0.7*" />
+                                                <ColumnDefinition Width="0.01*"/>
+
+                                            </Grid.ColumnDefinitions>
+                                            <Grid.RowDefinitions>
+                                                <RowDefinition Height="*" />
+                                                <RowDefinition Height="*" />
+                                                <RowDefinition Height="*" />
+                                                <RowDefinition Height="*" />
+                                                <RowDefinition Height="*" />
+                                            </Grid.RowDefinitions>
+                                            <Label Text=""/>
+                                            <Label Text="" Grid.Column="4"/>
+                                            <Label Text="{Binding Lieu}" 
+                            LineBreakMode="NoWrap"  
+                            Style="{DynamicResource ListItemTextStyle}" Grid.Column="1"
+                            FontSize="16" />
+
+                                            <Label Text="{Binding Libelle}" 
+                            LineBreakMode="NoWrap" 
+                            Style="{DynamicResource ListItemDetailTextStyle}" 
+                            Grid.Column="1" Grid.Row="1" Grid.ColumnSpan="3"/>
+
+                                            <Grid Grid.Row="0" Grid.Column="3" HorizontalOptions="End">
+                                                <Grid.ColumnDefinitions>
+                                                    <ColumnDefinition Width="auto" />
+                                                    <ColumnDefinition Width="auto" />
+                                                </Grid.ColumnDefinitions>
+
+                                                <Label Text="date : " 
+                                LineBreakMode="NoWrap"
+                                Style="{DynamicResource ListItemDetailTextStyle}"
+                                FontSize="13" Grid.Column="0" Grid.Row="0" HorizontalOptions="End"/>
+
+                                                <Label Text="{Binding Date}"
+                                LineBreakMode="NoWrap" 
+                                Style="{DynamicResource ListItemDetailTextStyle}" 
+                                FontSize="13" Grid.Column="1" Grid.Row="0" HorizontalOptions="Center"/>
+
+                                            </Grid>
+
+                                            <Label Grid.Row="2" FontSize="8"/>
+
+                                            <Label Text="récompense" 
+                            LineBreakMode="NoWrap" 
+                            Style="{DynamicResource ListItemDetailTextStyle}" 
+                            FontSize="13" Grid.Column="1" Grid.Row="3"/>
+
+                                            <Label Text="{Binding DescriRecompense}"
+                            LineBreakMode="NoWrap" 
+                            Style="{DynamicResource ListItemDetailTextStyle}" 
+                            FontSize="13" Grid.Column="1" Grid.Row="4"/>
+
+                                            <Label Text="categorie :" 
+                            LineBreakMode="NoWrap" 
+                            Style="{DynamicResource ListItemDetailTextStyle}" 
+                            FontSize="13" Grid.Column="3" Grid.Row="3" HorizontalOptions="End"/>
+
+                                            <Label Text="{Binding categorie_annonce_idcategorie_annonce}"
+                            LineBreakMode="NoWrap" 
+                            Style="{DynamicResource ListItemDetailTextStyle}" 
+                            FontSize="13" Grid.Column="3" Grid.Row="4" HorizontalOptions="End"/>
+
+                                        </Grid>
+                                    </Border>
+                                    
+                                </DataTemplate>
+                            </CollectionView.ItemTemplate>
+
+                        </CollectionView>
+
+                    </RefreshView>
+                </Grid>
+            </Grid>
+        </Border>
+    </Grid>
+</ContentPage>

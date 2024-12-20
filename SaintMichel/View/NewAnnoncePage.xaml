@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="SaintMichel.View.NewAnnoncePage"
+             Title="NewAnnoncePage">
+    <VerticalStackLayout>
+        <Label Text="Titre" FontSize="Medium" />
+        <Entry Text="{Binding Title, Mode=TwoWay}" FontSize="Medium" />
+        <Label Text="Compensation"/>
+        <RadioButton Content="non récompensé"/>
+        <RadioButton Content="récompensé"/>
+
+        <Label Text="Description" FontSize="Medium" />
+        <Editor Text="{Binding Description, Mode=TwoWay}" AutoSize="TextChanges" FontSize="Medium" Margin="0" />
+        <Label Text="Date" FontSize="Medium" />
+        <DatePicker Date="{Binding Date, Mode=TwoWay}" FontSize="Medium"/>
+        <Label Text="Lieu" FontSize="Medium" />
+        <Entry Text="{Binding Lieu, Mode=TwoWay}" FontSize="Medium" />
+        <StackLayout Orientation="Horizontal">
+            <Button Text="annuler" Command="{Binding CancelBtnCommand}" HorizontalOptions="FillAndExpand"></Button>
+            <Button Text="sauvegarder" Command="{Binding SaveBtnCommand}" HorizontalOptions="FillAndExpand"></Button>
+        </StackLayout>
+    </VerticalStackLayout>
+</ContentPage>
